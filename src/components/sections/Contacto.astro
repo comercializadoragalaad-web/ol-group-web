@@ -33,12 +33,11 @@ const t = useTranslations(lang);
 
     <!-- Form -->
     <form
+      id="contacto-form"
       method="POST"
       action="https://formspree.io/f/xlgvparg"
       class="reveal reveal-delay-1 space-y-5"
     >
-      <input type="hidden" name="_next" value="/gracias" />
-
       <!-- Nombre -->
       <div>
         <label for="nombre" class="block text-sm font-medium mb-2" style="color: #FAF6EE;">
@@ -108,11 +107,92 @@ const t = useTranslations(lang);
         </select>
       </div>
 
+      <!-- Error message -->
+      <p
+        id="contacto-error"
+        class="hidden text-sm text-center py-3 px-4 rounded-lg"
+        style="background: rgba(229,62,62,0.1); border: 1px solid rgba(229,62,62,0.3); color: #E53E3E;"
+      >
+        {t('contacto_error')}
+      </p>
+
       <!-- Submit -->
-      <button type="submit" class="btn-primary w-full mt-4">
-        {t('contacto_submit')} →
+      <button type="submit" id="contacto-submit" class="btn-primary w-full mt-4">
+        <span id="contacto-btn-text">{t('contacto_submit')} →</span>
+        <span id="contacto-btn-loading" class="hidden">{t('contacto_enviando')}</span>
       </button>
     </form>
 
+    <!-- Success message (hidden by default) -->
+    <div
+      id="contacto-success"
+      class="hidden text-center py-12 px-6 rounded-2xl"
+      style="background: #1C1C1C; border: 1px solid rgba(201,160,39,0.3);"
+    >
+      <div
+        class="w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-6"
+        style="background: rgba(201,160,39,0.15); border: 1px solid rgba(201,160,39,0.4);"
+      >
+        <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#C9A027" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+          <polyline points="20 6 9 17 4 12"/>
+        </svg>
+      </div>
+      <h3
+        class="text-2xl font-bold mb-3"
+        style="font-family: 'Playfair Display', Georgia, serif; color: #FAF6EE;"
+      >
+        {t('contacto_success_titulo')}
+      </h3>
+      <p style="color: #9B9080;">{t('contacto_success_desc')}</p>
+      <div
+        class="inline-flex items-center gap-2 px-4 py-2 rounded-full text-xs font-semibold mt-6"
+        style="background: rgba(201,160,39,0.1); border: 1px solid rgba(201,160,39,0.3); color: #C9A027;"
+      >
+        OL Group · Guatemala
+      </div>
+    </div>
+
   </div>
 </section>
+
+<script>
+  const form = document.getElementById('contacto-form') as HTMLFormElement | null;
+  const successEl = document.getElementById('contacto-success');
+  const errorEl = document.getElementById('contacto-error');
+  const submitBtn = document.getElementById('contacto-submit') as HTMLButtonElement | null;
+  const btnText = document.getElementById('contacto-btn-text');
+  const btnLoading = document.getElementById('contacto-btn-loading');
+
+  form?.addEventListener('submit', async (e) => {
+    e.preventDefault();
+    if (!form || !submitBtn) return;
+
+    errorEl?.classList.add('hidden');
+    submitBtn.disabled = true;
+    btnText?.classList.add('hidden');
+    btnLoading?.classList.remove('hidden');
+
+    try {
+      const response = await fetch(form.action, {
+        method: 'POST',
+        body: new FormData(form),
+        headers: { Accept: 'application/json' },
+      });
+
+      if (response.ok) {
+        form.classList.add('hidden');
+        successEl?.classList.remove('hidden');
+      } else {
+        errorEl?.classList.remove('hidden');
+        submitBtn.disabled = false;
+        btnText?.classList.remove('hidden');
+        btnLoading?.classList.add('hidden');
+      }
+    } catch {
+      errorEl?.classList.remove('hidden');
+      submitBtn.disabled = false;
+      btnText?.classList.remove('hidden');
+      btnLoading?.classList.add('hidden');
+    }
+  });
+</script>
