@@ -9,7 +9,6 @@ interface Props {
 const { lang } = Astro.props;
 const t = useTranslations(lang);
 
-const graciasUrl = lang === 'en' ? '/en/gracias/' : '/gracias/';
 ---
 
 <section id="contacto" class="py-20 lg:py-28" style="background: #0A0A0A;">
@@ -38,7 +37,7 @@ const graciasUrl = lang === 'en' ? '/en/gracias/' : '/gracias/';
       method="POST"
       data-netlify="true"
       netlify-honeypot="bot-field"
-      action={graciasUrl}
+      action="/gracias"
       class="reveal reveal-delay-1 space-y-5"
     >
       <input type="hidden" name="form-name" value="contacto-ol-group" />
