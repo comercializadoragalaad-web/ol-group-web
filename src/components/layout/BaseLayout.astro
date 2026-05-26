@@ -83,6 +83,20 @@ const jsonLd = JSON.stringify({
     <Footer lang={lang} />
     <FloatingButtons lang={lang} />
 
+    <!-- Netlify Forms: formulario estático oculto para que el bot de build lo detecte -->
+    <form name="contacto-ol-group" data-netlify="true" netlify-honeypot="bot-field" hidden>
+      <input type="hidden" name="form-name" value="contacto-ol-group" />
+      <input type="text" name="nombre" />
+      <input type="text" name="empresa" />
+      <input type="tel" name="telefono" />
+      <select name="modalidad">
+        <option value="llamada"></option>
+        <option value="whatsapp"></option>
+        <option value="presencial"></option>
+      </select>
+      <input type="text" name="bot-field" />
+    </form>
+
     <!-- Intersection Observer for reveal animations -->
     <script>
       const observer = new IntersectionObserver(
