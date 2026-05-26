@@ -1,0 +1,33 @@
+---
+interface Props {
+  nombre: string;
+  cargo: string;
+  texto: string;
+  iniciales: string;
+  delay?: number;
+}
+const { nombre, cargo, texto, iniciales, delay = 0 } = Astro.props;
+const delayClass = delay > 0 ? `reveal-delay-${delay}` : '';
+---
+
+<div class={`testimonial-card rounded-lg p-8 reveal ${delayClass}`} style="background: #fff;">
+  <span class="quote-mark">&ldquo;</span>
+  <p class="text-sm leading-relaxed mb-6" style="color: #333; margin-top: -1.25rem;">
+    {texto}
+  </p>
+  <div class="flex items-center gap-1 mb-4" style="color: #C9A027; font-size: 0.9rem; letter-spacing: 0.1em;">
+    ★★★★★
+  </div>
+  <div class="flex items-center gap-3 pt-4" style="border-top: 1px solid #F0E8D8;">
+    <div
+      class="w-10 h-10 rounded-full flex items-center justify-center font-bold text-sm flex-shrink-0"
+      style="background: rgba(201,160,39,0.15); color: #C9A027;"
+    >
+      {iniciales}
+    </div>
+    <div>
+      <div class="font-semibold text-sm" style="color: #0A0A0A;">{nombre}</div>
+      <div class="text-xs" style="color: #9B9080;">{cargo}</div>
+    </div>
+  </div>
+</div>

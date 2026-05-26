@@ -1,0 +1,25 @@
+---
+interface Props {
+  label?: string;
+  heading: string;
+  align?: 'center' | 'left';
+  dark?: boolean;
+}
+const { label, heading, align = 'center', dark = false } = Astro.props;
+const textColor = dark ? '#0A0A0A' : '#FAF6EE';
+const isCenter = align === 'center';
+---
+
+<div class={`reveal ${isCenter ? 'text-center' : ''}`}>
+  {label && <span class="section-label">{label}</span>}
+  <h2
+    class="font-serif font-bold text-4xl lg:text-5xl leading-tight"
+    style={`color: ${textColor};`}
+  >
+    <Fragment set:html={heading} />
+  </h2>
+  {isCenter
+    ? <span class="gold-sep"></span>
+    : <span class="gold-sep-left"></span>
+  }
+</div>

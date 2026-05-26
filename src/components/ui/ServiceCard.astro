@@ -1,0 +1,21 @@
+---
+interface Props {
+  icon: string;
+  titulo: string;
+  descripcion: string;
+  delay?: number;
+}
+const { icon, titulo, descripcion, delay = 0 } = Astro.props;
+const delayClass = delay > 0 ? `reveal-delay-${delay}` : '';
+---
+
+<div class={`service-card rounded-lg p-8 reveal ${delayClass}`} style="background: #1C1C1C;">
+  <div
+    class="w-12 h-12 rounded-lg flex items-center justify-center mb-6"
+    style="background: rgba(201,160,39,0.12);"
+  >
+    <Fragment set:html={icon} />
+  </div>
+  <h3 class="font-serif font-bold text-xl mb-3" style="color: #FAF6EE;">{titulo}</h3>
+  <p class="text-sm leading-relaxed" style="color: #9B9080;">{descripcion}</p>
+</div>

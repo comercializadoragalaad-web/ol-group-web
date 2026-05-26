@@ -1,0 +1,102 @@
+---
+import type { Lang } from '../../i18n';
+import Header from './Header.astro';
+import Footer from './Footer.astro';
+import FloatingButtons from './FloatingButtons.astro';
+import '../../styles/globals.css';
+import '@fontsource/playfair-display/400.css';
+import '@fontsource/playfair-display/700.css';
+import '@fontsource-variable/inter';
+
+interface Props {
+  title: string;
+  description: string;
+  lang: Lang;
+  ogImage?: string;
+}
+
+const { title, description, lang, ogImage = '/og-image.png' } = Astro.props;
+const canonical = new URL(Astro.url.pathname, Astro.site ?? 'https://olgroup.com.gt').href;
+const fullTitle = `${title} | OL Group`;
+
+const jsonLd = JSON.stringify({
+  '@context': 'https://schema.org',
+  '@type': 'AccountingService',
+  name: 'OL Group',
+  url: 'https://olgroup.com.gt',
+  telephone: '+50245354755',
+  email: 'info@olgroup.com.gt',
+  address: {
+    '@type': 'PostalAddress',
+    addressCountry: 'GT',
+  },
+  areaServed: 'Guatemala',
+  priceRange: '$$',
+  sameAs: ['https://wa.me/50277270862'],
+});
+---
+
+<!doctype html>
+<html lang={lang} class="scroll-smooth">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="generator" content={Astro.generator} />
+
+    <!-- Primary meta -->
+    <title>{fullTitle}</title>
+    <meta name="description" content={description} />
+    <link rel="canonical" href={canonical} />
+
+    <!-- OG / Social -->
+    <meta property="og:title"       content={fullTitle} />
+    <meta property="og:description" content={description} />
+    <meta property="og:image"       content={ogImage} />
+    <meta property="og:url"         content={canonical} />
+    <meta property="og:type"        content="website" />
+    <meta property="og:locale"      content={lang === 'es' ? 'es_GT' : 'en_US'} />
+
+    <!-- Twitter -->
+    <meta name="twitter:card"        content="summary_large_image" />
+    <meta name="twitter:title"       content={fullTitle} />
+    <meta name="twitter:description" content={description} />
+    <meta name="twitter:image"       content={ogImage} />
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+
+    <!-- Hreflang -->
+    <link rel="alternate" hreflang="es" href="https://olgroup.com.gt/" />
+    <link rel="alternate" hreflang="en" href="https://olgroup.com.gt/en/" />
+
+    <!-- JSON-LD -->
+    <script type="application/ld+json" set:html={jsonLd} />
+  </head>
+
+  <body class="font-sans antialiased" style="background: #0A0A0A; color: #FAF6EE;">
+    <Header lang={lang} />
+
+    <main>
+      <slot />
+    </main>
+
+    <Footer lang={lang} />
+    <FloatingButtons lang={lang} />
+
+    <!-- Intersection Observer for reveal animations -->
+    <script>
+      const observer = new IntersectionObserver(
+        (entries) => {
+          entries.forEach((entry) => {
+            if (entry.isIntersecting) {
+              entry.target.classList.add('visible');
+              observer.unobserve(entry.target);
+            }
+          });
+        },
+        { threshold: 0.08, rootMargin: '0px 0px -40px 0px' }
+      );
+      document.querySelectorAll('.reveal').forEach((el) => observer.observe(el));
+    </script>
+  </body>
+</html>

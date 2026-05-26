@@ -1,0 +1,131 @@
+---
+import type { Lang } from '../../i18n';
+import { useTranslations } from '../../i18n';
+import { CONTACT } from '../../lib/contact';
+
+interface Props {
+  lang: Lang;
+}
+const { lang } = Astro.props;
+const t = useTranslations(lang);
+---
+
+<section
+  id="inicio"
+  class="relative min-h-screen dot-grid flex items-center pt-20"
+  style="background-color: #0A0A0A;"
+>
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 w-full">
+    <div class="grid lg:grid-cols-2 gap-16 items-center">
+
+      <!-- Left: Text content -->
+      <div>
+        <!-- Badge -->
+        <div
+          class="hero-animate inline-flex items-center gap-2 px-4 py-2 rounded-full text-xs font-semibold mb-8 tracking-wide"
+          style="background: rgba(201,160,39,0.1); border: 1px solid rgba(201,160,39,0.3); color: #C9A027;"
+        >
+          <svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+            <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/>
+          </svg>
+          {t('hero_badge')}
+        </div>
+
+        <!-- H1 -->
+        <h1
+          class="hero-animate hero-delay-1 font-serif font-bold text-5xl lg:text-6xl xl:text-7xl leading-tight mb-6"
+          style="color: #FAF6EE;"
+        >
+          {t('hero_headline_1')}<br/>
+          <span style="color: #C9A027;">{t('hero_headline_2')}</span><br/>
+          {t('hero_headline_3')}
+        </h1>
+
+        <!-- Subtitle -->
+        <p
+          class="hero-animate hero-delay-2 text-lg lg:text-xl mb-10 leading-relaxed"
+          style="color: #9B9080; max-width: 480px;"
+        >
+          {t('hero_sub')}
+        </p>
+
+        <!-- CTAs -->
+        <div class="hero-animate hero-delay-3 flex flex-col sm:flex-row gap-4">
+          <a href="#contacto" class="btn-primary text-center">
+            {t('hero_cta_primary')}
+          </a>
+          <a href="#servicios" class="btn-outline text-center">
+            {t('hero_cta_secondary')}
+          </a>
+        </div>
+
+        <!-- Trust indicators -->
+        <div
+          class="hero-animate hero-delay-4 flex flex-wrap items-center gap-8 mt-12 pt-8"
+          style="border-top: 1px solid #1C1C1C;"
+        >
+          <div>
+            <div class="font-serif font-bold text-2xl" style="color: #C9A027;">+200</div>
+            <div class="text-xs mt-0.5" style="color: #9B9080;">{t('hero_stat_clientes')}</div>
+          </div>
+          <div style="width: 1px; height: 36px; background: #2A2A2A;"></div>
+          <div>
+            <div class="font-serif font-bold text-2xl" style="color: #C9A027;">10+</div>
+            <div class="text-xs mt-0.5" style="color: #9B9080;">{t('hero_stat_anos')}</div>
+          </div>
+          <div style="width: 1px; height: 36px; background: #2A2A2A;"></div>
+          <div>
+            <div class="font-serif font-bold text-2xl" style="color: #C9A027;">24h</div>
+            <div class="text-xs mt-0.5" style="color: #9B9080;">{t('hero_stat_respuesta')}</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Right: Image + card -->
+      <div class="hidden lg:flex justify-end items-center hero-animate hero-delay-5">
+        <div class="relative hero-image-frame" style="width: 440px;">
+          <!-- Image -->
+          <div
+            class="relative rounded-lg overflow-hidden"
+            style="background: #1C1C1C; height: 540px;"
+          >
+            <img
+              src="/images/Profe Balam sin fondo.png"
+              alt="Experto financiero OL Group"
+              class="w-full h-full object-cover object-top"
+              loading="eager"
+              fetchpriority="high"
+              width="440"
+              height="540"
+            />
+          </div>
+
+          <!-- Floating testimonial card -->
+          <div
+            class="absolute bottom-6 left-6 right-6 p-5 rounded-lg"
+            style="background: rgba(10,10,10,0.88); backdrop-filter: blur(12px); border: 1px solid rgba(201,160,39,0.3);"
+          >
+            <div style="color: #C9A027; font-size: 0.85rem; letter-spacing: 0.1em; margin-bottom: 6px;">★★★★★</div>
+            <p class="text-sm leading-snug" style="color: #FAF6EE; font-style: italic;">{t('hero_quote')}</p>
+            <p class="text-xs mt-2" style="color: #C9A027;">{t('hero_quote_author')}</p>
+          </div>
+
+          <!-- Decorative corner accent -->
+          <div
+            class="absolute -top-4 -right-4 w-20 h-20 rounded-full opacity-20"
+            style="background: radial-gradient(circle, #C9A027, transparent);"
+          ></div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- Scroll indicator -->
+  <div class="absolute bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center gap-1 scroll-indicator opacity-40">
+    <div class="w-px h-8" style="background: linear-gradient(to bottom, transparent, #C9A027);"></div>
+    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#C9A027" stroke-width="2">
+      <polyline points="6 9 12 15 18 9"></polyline>
+    </svg>
+  </div>
+</section>

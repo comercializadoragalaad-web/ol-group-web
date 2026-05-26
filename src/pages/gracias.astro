@@ -1,0 +1,46 @@
+---
+import BaseLayout from '../components/layout/BaseLayout.astro';
+import { getLangFromUrl, useTranslations } from '../i18n';
+
+const lang = getLangFromUrl(Astro.url);
+const t = useTranslations(lang);
+---
+
+<BaseLayout
+  title="Consulta solicitada"
+  description={t('site_description')}
+  lang={lang}
+>
+  <section
+    class="min-h-screen flex items-center justify-center px-4 pt-20"
+    style="background: #0A0A0A;"
+  >
+    <div class="text-center max-w-lg">
+      <!-- Checkmark -->
+      <div
+        class="w-20 h-20 rounded-full flex items-center justify-center mx-auto mb-8"
+        style="background: rgba(76,175,80,0.12); border: 2px solid rgba(76,175,80,0.4);"
+      >
+        <svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="#4CAF50" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+          <polyline points="20 6 9 17 4 12"/>
+        </svg>
+      </div>
+
+      <h1 class="font-serif font-bold text-4xl lg:text-5xl mb-4" style="color: #FAF6EE;">
+        {t('gracias_heading')}
+      </h1>
+      <p class="text-base mb-10" style="color: #9B9080;">
+        {t('gracias_sub')}
+      </p>
+
+      <!-- Gold separator -->
+      <span class="gold-sep"></span>
+
+      <div class="mt-10">
+        <a href={lang === 'en' ? '/en/' : '/'} class="btn-primary">
+          ← {t('gracias_back')}
+        </a>
+      </div>
+    </div>
+  </section>
+</BaseLayout>

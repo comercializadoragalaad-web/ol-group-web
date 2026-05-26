@@ -1,0 +1,24 @@
+---
+import BaseLayout from '../../components/layout/BaseLayout.astro';
+import Hero from '../../components/sections/Hero.astro';
+import Servicios from '../../components/sections/Servicios.astro';
+import PorQueElegirnos from '../../components/sections/PorQueElegirnos.astro';
+import Testimonios from '../../components/sections/Testimonios.astro';
+import Contacto from '../../components/sections/Contacto.astro';
+import { getLangFromUrl, useTranslations } from '../../i18n';
+
+const lang = getLangFromUrl(Astro.url);
+const t = useTranslations(lang);
+---
+
+<BaseLayout
+  title={t('site_title')}
+  description={t('site_description')}
+  lang={lang}
+>
+  <Hero lang={lang} />
+  <Servicios lang={lang} />
+  <PorQueElegirnos lang={lang} />
+  <Testimonios lang={lang} />
+  <Contacto lang={lang} />
+</BaseLayout>

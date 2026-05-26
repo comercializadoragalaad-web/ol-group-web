@@ -1,0 +1,113 @@
+---
+import type { Lang } from '../../i18n';
+import { useTranslations } from '../../i18n';
+
+interface Props {
+  lang: Lang;
+}
+const { lang } = Astro.props;
+const t = useTranslations(lang);
+
+const homeUrl   = lang === 'en' ? '/en/' : '/';
+const altUrl    = lang === 'en' ? '/'    : '/en/';
+const altLabel  = lang === 'en' ? t('nav_lang_es') : t('nav_lang_en');
+const curLabel  = lang === 'en' ? t('nav_lang_en') : t('nav_lang_es');
+---
+
+<header id="header" class="fixed top-0 left-0 right-0 z-50 transition-all duration-300" style="background: transparent;">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="flex items-center justify-between h-20">
+
+      <!-- Logo -->
+      <a href={homeUrl} class="flex items-center gap-3 flex-shrink-0">
+        <img
+          src="/images/OL Group — Logo Principal.png"
+          alt="OL Group"
+          class="h-10 w-auto object-contain"
+          loading="eager"
+        />
+      </a>
+
+      <!-- Desktop nav -->
+      <nav class="hidden md:flex items-center gap-8">
+        <a href="#servicios"   class="nav-link">{t('nav_servicios')}</a>
+        <a href="#por-que"     class="nav-link">{t('nav_porque')}</a>
+        <a href="#testimonios" class="nav-link">{t('nav_testimonios')}</a>
+        <a href="#contacto"    class="btn-primary !py-2 !px-5 !text-sm">{t('nav_contacto')}</a>
+
+        <!-- Lang toggle -->
+        <div
+          class="flex items-center gap-1 text-sm border rounded px-2 py-1"
+          style="border-color: #2A2A2A; color: #9B9080;"
+        >
+          <span class="font-semibold" style="color: #C9A027;">{curLabel}</span>
+          <span class="opacity-30">|</span>
+          <a href={altUrl} class="transition-colors hover:text-cream">{altLabel}</a>
+        </div>
+      </nav>
+
+      <!-- Mobile hamburger -->
+      <button id="menu-btn" class="md:hidden p-2 text-cream" aria-label="Menú" aria-expanded="false">
+        <svg id="icon-open" width="24" height="24" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M4 6h16M4 12h16M4 18h16"/>
+        </svg>
+        <svg id="icon-close" width="24" height="24" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" class="hidden">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12"/>
+        </svg>
+      </button>
+    </div>
+  </div>
+
+  <!-- Mobile menu -->
+  <div
+    id="mobile-menu"
+    class="md:hidden hidden"
+    style="background: rgba(10,10,10,0.98); border-top: 1px solid #1C1C1C;"
+  >
+    <div class="px-6 py-6 flex flex-col gap-5">
+      <a href="#servicios"   class="text-sm font-medium" style="color: #9B9080;">{t('nav_servicios')}</a>
+      <a href="#por-que"     class="text-sm font-medium" style="color: #9B9080;">{t('nav_porque')}</a>
+      <a href="#testimonios" class="text-sm font-medium" style="color: #9B9080;">{t('nav_testimonios')}</a>
+      <a href="#contacto"    class="btn-primary !text-sm text-center">{t('nav_contacto')}</a>
+      <div
+        class="flex gap-4 text-sm pt-4"
+        style="border-top: 1px solid #1C1C1C;"
+      >
+        <span class="font-semibold" style="color: #C9A027;">{curLabel}</span>
+        <span style="color: #2A2A2A;">|</span>
+        <a href={altUrl} style="color: #9B9080;">{altLabel}</a>
+      </div>
+    </div>
+  </div>
+</header>
+
+<script>
+  const header   = document.getElementById('header')!;
+  const menuBtn  = document.getElementById('menu-btn')!;
+  const mobileMenu = document.getElementById('mobile-menu')!;
+  const iconOpen  = document.getElementById('icon-open')!;
+  const iconClose = document.getElementById('icon-close')!;
+
+  // Scroll effect
+  window.addEventListener('scroll', () => {
+    header.classList.toggle('header-scrolled', window.scrollY > 40);
+  }, { passive: true });
+
+  // Toggle mobile menu
+  menuBtn.addEventListener('click', () => {
+    const open = mobileMenu.classList.toggle('hidden') === false;
+    menuBtn.setAttribute('aria-expanded', String(open));
+    iconOpen.classList.toggle('hidden', open);
+    iconClose.classList.toggle('hidden', !open);
+  });
+
+  // Close on link click
+  mobileMenu.querySelectorAll('a').forEach(link => {
+    link.addEventListener('click', () => {
+      mobileMenu.classList.add('hidden');
+      iconOpen.classList.remove('hidden');
+      iconClose.classList.add('hidden');
+      menuBtn.setAttribute('aria-expanded', 'false');
+    });
+  });
+</script>

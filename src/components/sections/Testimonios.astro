@@ -1,0 +1,45 @@
+---
+import type { Lang } from '../../i18n';
+import { useTranslations } from '../../i18n';
+import SectionHeading from '../ui/SectionHeading.astro';
+import TestimonialCard from '../ui/TestimonialCard.astro';
+
+interface Props {
+  lang: Lang;
+}
+const { lang } = Astro.props;
+const t = useTranslations(lang);
+
+const testimonios = [
+  { key: '1', iniciales: 'CM', delay: 0 },
+  { key: '2', iniciales: 'AL', delay: 1 },
+  { key: '3', iniciales: 'RK', delay: 2 },
+] as const;
+---
+
+<section id="testimonios" class="py-20 lg:py-28" style="background: #FAF6EE;">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+
+    <div class="mb-16">
+      <SectionHeading
+        label={t('testimonios_label')}
+        heading={t('testimonios_heading')}
+        align="center"
+        dark={true}
+      />
+    </div>
+
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+      {testimonios.map((item) => (
+        <TestimonialCard
+          nombre={t(`testimonios_${item.key}_nombre` as any)}
+          cargo={t(`testimonios_${item.key}_cargo` as any)}
+          texto={t(`testimonios_${item.key}_texto` as any)}
+          iniciales={item.iniciales}
+          delay={item.delay as 0 | 1 | 2 | 3 | 4}
+        />
+      ))}
+    </div>
+
+  </div>
+</section>

@@ -1,0 +1,123 @@
+---
+import type { Lang } from '../../i18n';
+import { useTranslations } from '../../i18n';
+import SectionHeading from '../ui/SectionHeading.astro';
+
+interface Props {
+  lang: Lang;
+}
+const { lang } = Astro.props;
+const t = useTranslations(lang);
+
+const graciasUrl = lang === 'en' ? '/en/gracias/' : '/gracias/';
+---
+
+<section id="contacto" class="py-20 lg:py-28" style="background: #0A0A0A;">
+  <div class="max-w-xl mx-auto px-4 sm:px-6">
+
+    <!-- Heading -->
+    <div class="text-center mb-12">
+      <SectionHeading
+        label={t('contacto_label')}
+        heading={t('contacto_heading')}
+        align="center"
+        dark={false}
+      />
+      <p class="mt-6 text-base" style="color: #9B9080;">{t('contacto_sub')}</p>
+      <div
+        class="inline-flex items-center gap-2 px-4 py-2 rounded-full text-xs font-semibold mt-4"
+        style="background: rgba(201,160,39,0.1); border: 1px solid rgba(201,160,39,0.3); color: #C9A027;"
+      >
+        {t('contacto_badge')}
+      </div>
+    </div>
+
+    <!-- Form -->
+    <form
+      name="contacto-ol-group"
+      method="POST"
+      data-netlify="true"
+      netlify-honeypot="bot-field"
+      action={graciasUrl}
+      class="reveal reveal-delay-1 space-y-5"
+    >
+      <input type="hidden" name="form-name" value="contacto-ol-group" />
+      <p class="hidden"><label>No llenar: <input name="bot-field" /></label></p>
+
+      <!-- Nombre -->
+      <div>
+        <label for="nombre" class="block text-sm font-medium mb-2" style="color: #FAF6EE;">
+          {t('contacto_nombre')} <span style="color: #C9A027;">*</span>
+        </label>
+        <input
+          type="text"
+          id="nombre"
+          name="nombre"
+          required
+          minlength="2"
+          placeholder={t('contacto_placeholder_nombre')}
+          class="form-input"
+          autocomplete="name"
+        />
+      </div>
+
+      <!-- Empresa -->
+      <div>
+        <label for="empresa" class="block text-sm font-medium mb-2" style="color: #FAF6EE;">
+          {t('contacto_empresa')} <span style="color: #C9A027;">*</span>
+        </label>
+        <input
+          type="text"
+          id="empresa"
+          name="empresa"
+          required
+          placeholder={t('contacto_placeholder_empresa')}
+          class="form-input"
+          autocomplete="organization"
+        />
+      </div>
+
+      <!-- Teléfono -->
+      <div>
+        <label for="telefono" class="block text-sm font-medium mb-2" style="color: #FAF6EE;">
+          {t('contacto_telefono')} <span style="color: #C9A027;">*</span>
+        </label>
+        <input
+          type="tel"
+          id="telefono"
+          name="telefono"
+          required
+          placeholder={t('contacto_placeholder_telefono')}
+          class="form-input"
+          autocomplete="tel"
+          pattern="[0-9\s\-\+\(\)]{7,15}"
+        />
+      </div>
+
+      <!-- Modalidad -->
+      <div>
+        <label for="modalidad" class="block text-sm font-medium mb-2" style="color: #FAF6EE;">
+          {t('contacto_modalidad')} <span style="color: #C9A027;">*</span>
+        </label>
+        <select
+          id="modalidad"
+          name="modalidad"
+          required
+          class="form-input appearance-none cursor-pointer"
+          style="background-image: url(\"data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='%239B9080' stroke-width='2'%3E%3Cpolyline points='6 9 12 15 18 9'/%3E%3C/svg%3E\"); background-repeat: no-repeat; background-position: right 14px center; padding-right: 40px;"
+        >
+          <option value="">{t('contacto_modalidad_placeholder')}</option>
+          <option value="llamada">{t('contacto_modalidad_llamada')}</option>
+          <option value="whatsapp">{t('contacto_modalidad_whatsapp')}</option>
+          <option value="presencial">{t('contacto_modalidad_presencial')}</option>
+        </select>
+      </div>
+
+      <!-- Submit -->
+      <button type="submit" class="btn-primary w-full mt-4">
+        {t('contacto_submit')} →
+      </button>
+    </form>
+
+  </div>
+</section>
