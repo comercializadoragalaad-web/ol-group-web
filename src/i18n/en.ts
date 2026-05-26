@@ -94,6 +94,16 @@ export const en = {
   gracias_heading: 'We received your request!',
   gracias_sub: 'We will contact you within 24 business hours.',
   gracias_back: 'Back to home',
+  gracias_steps_label: "What's next?",
+  gracias_step1_title: 'We review your request',
+  gracias_step1_desc: 'An OL Group professional reviews the details of your company and your needs.',
+  gracias_step2_title: 'We contact you',
+  gracias_step2_desc: "You'll receive a call or message within 24 business hours to schedule your consultation.",
+  gracias_step3_title: 'Your free consultation',
+  gracias_step3_desc: 'Real guidance and at least one actionable financial tip, completely free.',
+  gracias_contact_alt: 'Need an immediate response?',
+  gracias_contact_wa: 'Chat on WhatsApp',
+  gracias_contact_call: 'Call us now',
 
   // SEO
   site_title: 'OL Group — Financial Services Guatemala',

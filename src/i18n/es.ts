@@ -94,6 +94,16 @@ export const es = {
   gracias_heading: '¡Recibimos tu solicitud!',
   gracias_sub: 'Te contactaremos en menos de 24 horas hábiles.',
   gracias_back: 'Volver al inicio',
+  gracias_steps_label: '¿Qué sigue?',
+  gracias_step1_title: 'Revisamos tu solicitud',
+  gracias_step1_desc: 'Un profesional de OL Group revisa los detalles de tu empresa y tu necesidad.',
+  gracias_step2_title: 'Te contactamos',
+  gracias_step2_desc: 'Recibirás una llamada o mensaje en menos de 24 horas hábiles para coordinar tu consulta.',
+  gracias_step3_title: 'Tu consulta gratuita',
+  gracias_step3_desc: 'Orientación real y al menos un tip financiero accionable, completamente sin costo.',
+  gracias_contact_alt: '¿Necesitas una respuesta inmediata?',
+  gracias_contact_wa: 'Escríbenos por WhatsApp',
+  gracias_contact_call: 'Llámanos ahora',
 
   // SEO
   site_title: 'OL Group — Servicios Financieros Guatemala',
