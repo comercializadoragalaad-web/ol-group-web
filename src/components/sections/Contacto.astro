@@ -33,15 +33,11 @@ const t = useTranslations(lang);
 
     <!-- Form -->
     <form
-      name="contacto-ol-group"
       method="POST"
-      data-netlify="true"
-      netlify-honeypot="bot-field"
-      action="/gracias"
+      action="https://formspree.io/f/xlgvparg"
       class="reveal reveal-delay-1 space-y-5"
     >
-      <input type="hidden" name="form-name" value="contacto-ol-group" />
-      <p class="hidden"><label>No llenar: <input name="bot-field" /></label></p>
+      <input type="hidden" name="_next" value="/gracias" />
 
       <!-- Nombre -->
       <div>
